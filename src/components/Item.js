@@ -9,10 +9,9 @@ import { load } from "./Services.js";
 import Search from "./Search.js";
 import Favmark from "./Favmark.js";
 import LinkLazy from "./LinkLazy.js";
-import Records from "./Records.js";
 import SingleItem from "./SingleItem.js";
-
-const Content = () => {
+import Records from "./Records.js";
+const Item = () => {
   const [content, setContent] = useState({});
   const [loading, setLoading] = useState(true);
   const location = useLocation();
@@ -50,3 +49,4 @@ const Content = () => {
     </main>
   );
 };
+export default Item;

@@ -9,7 +9,9 @@ import {
   Navigate,
 } from "react-router-dom";
 import Item from "./components/Content.js";
-
+import useRoutes from "./routes";
+import useLinksNav from "./components/LinksNav";
+import NavBar from "./components/NavBar";
 let pages = ["planets", "people", "species", "starships", "vehicles", "films"];
 
 //window.localStorage.clear()
@@ -17,75 +19,19 @@ let pages = ["planets", "people", "species", "starships", "vehicles", "films"];
 
 const App = () => {
   const page = useLocation();
-  const routes = pages.map((e, k) => {
-    return (
-      <React.Fragment key={k}>
-        <Route path={e + "/items"} element={<Item />}>
-          <Route path=":Id" element={<Item />} />
-        </Route>
-        <Route path={e + "/pages"} element={<Item />}>
-          <Route path=":Id" element={<Item />} />
-        </Route>
-      </React.Fragment>
-    );
-  });
+  const AllRoutes = useRoutes(pages);
+  const LinksNav = useLinksNav(pages, page)
 
-  const LinksNav = pages.map((e, k) => (
-    <NavLink
-      to={e + "/pages/1"}
-      key={k}
-      className={
-        page.pathname.includes(e)
-          ? "nav-item nav-link active"
-          : "nav-item nav-link"
-      }
-    >
-      {e.toUpperCase()}
-    </NavLink>
-  ));
 
   return (
     <>
-      <div className="d-flex min-vh-100">
-        <div className="d-flex menuwrap position-relative ">
-          <div
-            className="collapse collapse-horizontal show"
-            id="collapseWidthExample"
-          >
-            <nav className="p-3 bg-body pe-5">
-              <a
-                href="/"
-                className="mt-4 d-flex align-items-center text-decoration-none link-dark"
-              >
-                <img
-                  src={logo}
-                  className="bi pe-none"
-                  width="40"
-                  height="32"
-                  alt="logo"
-                />
-                <span className="fs-3">Swapi.tech</span>
-              </a>
-              <ul className="nav nav-pills flex-column mt-4">{LinksNav}</ul>
-            </nav>
-          </div>
-          <button
-            className="shadow btn border-end border-start btn btn btn-light rounded-0 h-100 ms-2"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseWidthExample"
-            aria-expanded="true"
-            aria-controls="collapseWidthExample"
-          >
-            <i className="bi bi-list fs-2 position-fixed top-50"></i>
-			<i className="bi bi-list fs-2 invisible"></i>
-          </button>
-        </div>
+    <NavBar LinksNav={LinksNav} />
+
         <Routes>
-          {routes}
+          {AllRoutes}
           <Route path="*" element={<Navigate to="/planets/pages/1" />} />
         </Routes>
-      </div>
+
     </>
   );
 };
