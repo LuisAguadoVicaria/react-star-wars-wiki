@@ -1,18 +1,11 @@
-import logo from "./logo.svg";
 import "./App.css";
+import "./bootstrap.css";
 import React from "react";
-import {
-  Routes,
-  Route,
-  NavLink,
-  useLocation,
-  Navigate,
-} from "react-router-dom";
-import Item from "./components/Content.js";
-import useRoutes from "./routes";
-import useLinksNav from "./components/LinksNav";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import useRoutes from "./Routes";
+import useLinksNav from "./components/subcomponents/LinksNav";
 import NavBar from "./components/NavBar";
-let pages = ["planets", "people", "species", "starships", "vehicles", "films"];
+let pages = ["films", "people", "planets", "species", "starships", "vehicles"];
 
 //window.localStorage.clear()
 //window.localStorage.setItem('favs-sw','')
@@ -20,19 +13,19 @@ let pages = ["planets", "people", "species", "starships", "vehicles", "films"];
 const App = () => {
   const page = useLocation();
   const AllRoutes = useRoutes(pages);
-  const LinksNav = useLinksNav(pages, page)
-
+  const LinksNav = useLinksNav(pages, page);
 
   return (
-    <>
-    <NavBar LinksNav={LinksNav} />
+    <div className="vh-100 vw-100 overflow-hidden d-flex bg-transparent position-relative">
+      <div className="star"></div>
+      <div className="star2"></div>
+      <NavBar LinksNav={LinksNav} />
 
-        <Routes>
-          {AllRoutes}
-          <Route path="*" element={<Navigate to="/planets/pages/1" />} />
-        </Routes>
-
-    </>
+      <Routes>
+        {AllRoutes}
+        <Route path="*" element={<Navigate to="/planets/pages/1" />} />
+      </Routes>
+    </div>
   );
 };
 

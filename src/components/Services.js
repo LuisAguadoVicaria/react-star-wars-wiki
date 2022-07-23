@@ -12,7 +12,6 @@ export const load = async (url, page = false) => {
       JSON.stringify({ ...local, ...{ time: new Date() } })
     );
   }
-  //console.log(local)
   return JSON.stringify(local);
 };
 
@@ -37,3 +36,40 @@ export const delFavs = (name) => {
   favs = favs.filter((e) => e.name !== name);
   window.localStorage.setItem("favs-sw", JSON.stringify(favs));
 };
+export const parseDate = (date) =>
+  `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+
+export const formatOut = (obj) =>
+  obj.hasOwnProperty("results") ? obj.results : obj.result;
+
+export const urltoitem = (url = "") =>
+  url !== "" ? "/" + url.slice(27).split("/").join("/items/") : "";
+
+export const filterMain = (res) =>
+  Object.fromEntries(
+    new Map(
+      Object.entries({ ...res }).filter(
+        ([key, value]) =>
+          key === "name" ||
+          key === "created" ||
+          key === "edited" ||
+          key === "title"
+      )
+    )
+  );
+
+export const filterRestof = (res) =>
+  Object.fromEntries(
+    new Map(
+      Object.entries({ ...res }).filter(
+        ([key, value]) =>
+          key !== "name" &&
+          key !== "created" &&
+          key !== "edited" &&
+          key !== "url" &&
+          key !== "title"
+      )
+    )
+  );
+export const objectType = (data) => (typeof data === "object" ? data : {});
+export const arrayType = (data) => (Array.isArray(data) ? data : []);

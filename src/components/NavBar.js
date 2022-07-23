@@ -1,41 +1,29 @@
 import logo from "../logo.svg";
-const NavBar = ({LinksNav}) => (<>
-  <div className="d-flex min-vh-100">
-    <div className="d-flex menuwrap position-relative ">
+const NavBar = ({ LinksNav }) => (
+  <>
+    <div className="d-flex min-vh-100">
       <div
         className="collapse collapse-horizontal show"
         id="collapseWidthExample"
       >
-        <nav className="p-3 bg-body pe-5">
-          <a
-            href="/"
-            className="mt-4 d-flex align-items-center text-decoration-none link-dark"
-          >
-            <img
-              src={logo}
-              className="bi pe-none"
-              width="40"
-              height="32"
-              alt="logo"
-            />
-            <span className="fs-3">Swapi.tech</span>
+        <div className="w-custom p-3 bg-transparent">
+          <a href="/">
+            <img src={logo} className="img-fluid bi p-0 m-0" alt="logo" />
           </a>
-          <ul className="nav nav-pills flex-column mt-4">{LinksNav}</ul>
-        </nav>
+          <ul className="list-group mt-3">{LinksNav}</ul>
+        </div>
       </div>
       <button
-        className="shadow btn border-end border-start btn btn btn-light rounded-0 h-100 ms-2"
+        className="shadow btn btn-sm btn-outline-warning rounded-0"
         type="button"
         data-bs-toggle="collapse"
         data-bs-target="#collapseWidthExample"
         aria-expanded="true"
         aria-controls="collapseWidthExample"
       >
-        <i className="bi bi-list fs-2 position-fixed top-50"></i>
-  <i className="bi bi-list fs-2 invisible"></i>
+        <i className="bi bi-list fs-2"></i>
       </button>
     </div>
-
-  </div>
-</>)
+  </>
+);
 export default NavBar;

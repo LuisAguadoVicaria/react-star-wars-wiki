@@ -1,100 +1,97 @@
-import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import Favmark from "./subcomponents/Favmark";
+import LinkLazy from "./subcomponents/LinkLazy";
 import {
-  NavLink,
-  Link,
-  useLocation,
-  useParams,
-} from "react-router-dom";
-import { load } from "./Services.js";
-import Search from "./Search.js";
-import Favmark from "./Favmark.js";
-import LinkLazy from "./LinkLazy.js";
-
-
+  urltoitem,
+  filterMain,
+  filterRestof,
+  parseDate,
+  objectType,
+  formatOut,
+} from "./Services";
 
 const SingleItem = ({ data }) => {
   const location = useLocation();
+  const content = objectType(formatOut(data)).properties;
 
-  const urltoitem = (url) => "/" + url.slice(27).split("/").join("/items/");
+  const main = filterMain({ ...content });
+  const restof = filterRestof({ ...content });
 
-  const parseData = (obj) =>
-    obj.hasOwnProperty("result") ? obj.result.properties : obj;
+  const path = location.pathname.split("/")[1].toLowerCase();
+  const imageLocation = path === "people" ? "characters" : path;
 
-  const res = parseData(data);
-
-  const toLink = (path) =>
-    path === "/" ? (
-      ""
-    ) : (
-      <LinkLazy key={path} path={path}>
-        {path}
-      </LinkLazy>
-    );
-
-  const main = Object.fromEntries(
-    new Map(
-      Object.entries({ ...res }).filter(
-        ([key, value]) =>
-          key === "name" ||
-          key === "created" ||
-          key === "edited" ||
-          key === "title"
-      )
-    )
+  const toLink = (path) => (
+    <LinkLazy key={path} path={path}>
+      {path}
+    </LinkLazy>
   );
-
-  const restof = Object.fromEntries(
-    new Map(
-      Object.entries({ ...res }).filter(
-        ([key, value]) =>
-          key !== "name" &&
-          key !== "created" &&
-          key !== "edited" &&
-          key !== "url" &&
-          key !== "title"
-      )
-    )
-  );
-
-  const parseDate = (date) =>
-    `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
 
   const convertLinks = (value) =>
-    Array.isArray(value)
-      ? [...value].map((e = "") => toLink(urltoitem(String(e))))
-      : String(value).includes("swapi.tech")
-      ? toLink(urltoitem(value))
+    String(value).includes("swapi.tech")
+      ? Array.isArray(value)
+        ? [...value].map((e = "") => toLink(urltoitem(e)))
+        : toLink(urltoitem(value))
       : value;
 
   return (
-    <article className="card shadow bg-light p-4">
-      <section className="card-body">
-        <header className="card-title d-flex justify-content-between flex-wrap text-nowrap">
-          <h1>{main.name}
-          {main.title}</h1>
+    <>
+      {" "}
+      <article className="position-relative">
+        <header className="d-flex">
+          <h1 className="m-0 mt-auto">
+            {main.name}
+            {main.title}
+          </h1>
           <Favmark
             name={main.title === undefined ? main.name : main.title}
             path={location.pathname}
           />
         </header>
-        <dl className="card-text mt-5">
+
+        <div className="mt-4 me-3 position-absolute top-0 end-0">
+          <img
+            className="mt-4 img-fluid rounded"
+            src={`https://starwars-visualguide.com/assets/img/${imageLocation}/${
+              location.pathname.split("/")[3]
+            }.jpg`}
+            type="image/png"
+            alt="front"
+          />
+        </div>
+
+        <dl className="row g-1 p-3 list-group">
           {Object.entries({ ...restof })
             .reverse()
             .map(([key, value]) => (
-              <span key={key}>
-                <dt className="mt-4 fw-semibold">{key.split("_").join(" ").toUpperCase()}</dt>
-                <dd className="list-group card-body m-3 fw-light lh-lg">{convertLinks(value)}</dd>
+              <span
+                className="col-auto m-1
+            "
+                key={key}
+              >
+                <dt className="text-capitalize text-muted border-bottom mb-2">
+                  {key.split("_").join(" ")}
+                </dt>
+                <dd className="text-capitalize">{convertLinks(value)}</dd>
               </span>
             ))}
         </dl>
-        <aside className="card-text text-end">
-          <small className="text-muted">
+
+        <aside className="mt-1 d-flex">
+          <small className="text-muted text-end m-auto me-0">
             Created: {parseDate(new Date(Date.parse(main.created)))} | Edited:{" "}
-            {parseDate(new Date(Date.parse(main.edited)))}
+            {parseDate(new Date(Date.parse(main.edited)))} |{" "}
+            <a className="mx-1" href="https://github.com/LuisAguadoVicaria">
+              LuisAguadoVicaría
+            </a>{" "}
+            |{" "}
+            <a className="mx-1" href="https://www.swapi.tech/">
+              swapi.tech
+            </a>{" "}
+            |
           </small>
         </aside>
-      </section>
-    </article>
+      </article>
+    </>
   );
 };
 export default SingleItem;
