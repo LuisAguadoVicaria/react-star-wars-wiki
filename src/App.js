@@ -23,7 +23,7 @@ const App = () => {
 
       <Routes>
         {AllRoutes}
-        <Route path="*" element={<Navigate to="/planets/pages/1" />} />
+        <Route path="*" element={<Navigate to="/films/pages/1" />} />
       </Routes>
     </div>
   );
