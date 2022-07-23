@@ -4,13 +4,13 @@
   Star Wars reading list and visual guide interpreting the REST API <a href="https://www.swapi.tech/">swapi.tech</a>
 </p>
 <p align="center" >
-  <a href="  ">
+  <a href="https://luisaguadovicaria.github.io/react-star-wars-wiki/">
     <img height="44px"  src="https://github.com/LuisAguadoVicaria/LuisAguadoVicaria/raw/main/proyect-images/live-demo-button.png" alt="live-demo" align="center">
   </a>
 </p>
 
 <p align="center">
-  <img src="https://github.com/LuisAguadoVicaria/LuisAguadoVicaria/raw/main/proyect-images/react-simple-landing-page.png" alt="front-image" align="center">
+  <img src="https://github.com/LuisAguadoVicaria/LuisAguadoVicaria/raw/main/proyect-images/react-star-wars-wiki.png" alt="front-image" align="center">
 </p>
 <div align="center">
 
@@ -25,6 +25,7 @@
 <br>
 
 ## Featured
+
 <br>
 
 >   <li>Async fetch with loading animation</li>
@@ -34,8 +35,6 @@
 >   <li>Add and save favorites locally</li>
 >   <li>Close the search bar by clicking outside</li>
 >   <li>A stunning design with a custom bootstrap skin</li>
-
-
 
 <br>
 
@@ -57,7 +56,7 @@
 
 <sub><sub>You can also open any GitHub repository in Gitpod</sub></sub> 
   
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#<your-project-url>)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/LuisAguadoVicaria/react-star-wars-wiki/)
 
 ## Contact
 
