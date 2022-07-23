@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/react-star-wars-wiki/static/css/main.0024f2d7.css",
+    "main.js": "/react-star-wars-wiki/static/js/main.fd705cb7.js",
+    "static/media/logo.svg": "/react-star-wars-wiki/static/media/logo.3bf2a05eba37f49b9b0ddfa3920fb34f.svg",
+    "index.html": "/react-star-wars-wiki/index.html",
+    "main.0024f2d7.css.map": "/react-star-wars-wiki/static/css/main.0024f2d7.css.map",
+    "main.fd705cb7.js.map": "/react-star-wars-wiki/static/js/main.fd705cb7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0024f2d7.css",
+    "static/js/main.fd705cb7.js"
+  ]
+}
